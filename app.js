@@ -59,6 +59,34 @@ app.command('/shelby-quote', async ({ ack, respond }) => {
   });
 });
 
+// Command 4: /shelby-ledger
+app.command('/shelby-ledger', async ({ command, ack, respond }) => {
+  await ack();
+  
+  const entry = command.text;
+  if (!entry) {
+    await respond('The ledger requires an entry! Usage: `/shelby-ledger secured the new contract`');
+    return;
+  }
+
+  await respond({
+    response_type: 'in_channel',
+    text: `📖 *LEDGER UPDATED:*\nThomas has noted: _"${entry}"_. Good business.`
+  });
+});
+
+// Command 5: /shelby-coin
+app.command('/shelby-coin', async ({ ack, respond }) => {
+  await ack();
+  
+  const outcome = Math.random() < 0.5 ? "Heads" : "Tails";
+  
+  await respond({
+    response_type: 'in_channel',
+    text: `🪙 *Flipping the coin...*\n\nIt landed on **${outcome}**. The universe has spoken, get on with it.`
+  });
+});
+
 
 // Start the app
 (async () => {
