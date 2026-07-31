@@ -25,6 +25,41 @@ app.command('/by-order-of', async ({ command, ack, respond }) => {
   });
 });
 
+// Command 2: /family-meeting
+app.command('/family-meeting', async ({ command, ack, respond }) => {
+  await ack();
+  
+  // If they don't provide a topic, default to "company business"
+  const topic = command.text || "company business";
+
+  await respond({
+    response_type: 'in_channel',
+    text: `🕰️ *FAMILY MEETING CALLED*\n\nBy order of management, we are discussing: *${topic}*.\nEveryone report to the Watery Lane boardroom (or drop your updates in a thread below).`
+  });
+});
+
+// Command 3: /shelby-quote
+app.command('/shelby-quote', async ({ ack, respond }) => {
+  await ack();
+  
+  // An array of classic Peaky Blinders quotes
+  const quotes = [
+    "You can change what you do, but you can't change what you want.",
+    "The only way to guarantee peace is by making the prospect of war seem hopeless.",
+    "Good taste is for people who can't afford sapphires.",
+    "I don't pay for suits. My suits are on the house or the house burns down."
+  ];
+  
+  // Pick a random quote from the list
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+  await respond({
+    response_type: 'in_channel',
+    text: `🥃 *Word from Thomas Shelby:*\n> "${randomQuote}"`
+  });
+});
+
+
 // Start the app
 (async () => {
   await app.start();
