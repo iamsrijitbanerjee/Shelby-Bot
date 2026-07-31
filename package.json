@@ -1,0 +1,25 @@
+{
+  "name": "5.-shelby-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamsrijitbanerjee/Shelby-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/iamsrijitbanerjee/Shelby-Bot/issues"
+  },
+  "homepage": "https://github.com/iamsrijitbanerjee/Shelby-Bot#readme",
+  "dependencies": {
+    "@slack/bolt": "^5.0.0",
+    "dotenv": "^17.4.2"
+  }
+}
