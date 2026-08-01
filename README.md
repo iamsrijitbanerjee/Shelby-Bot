@@ -1,9 +1,51 @@
-# Shelby Company Ltd. Bot 🥃
+# Shelby Company Ltd. Bot
 
-Welcome to the Shelby Company Ltd. Slack bot. I built this project to bring a bit of the Peaky Blinders' ruthless productivity and aesthetic into our daily Slack workspace. Instead of boring reminders and standard notifications, this bot acts as the management of the Shelby Company, ensuring tasks are broadcasted, meetings are called, and everyone stays on track, by order of the Peaky Blinders.
+Welcome to the Shelby Company Ltd. Slack bot. I built this project to bring a bit of the Peaky Blinders' ruthless productivity and aesthetic into our daily Slack workspace. Instead of boring reminders and standard notifications, this bot acts as the management of the Shelby Company, ensuring tasks are broadcasted, meetings are called, and everyone stays on track—by order of the Peaky Blinders.
 
-Building this bot was a great way to learn more JavaScript and the Slack API. I started by registering the application on the Slack Developer portal and enabling Socket Mode so the bot could communicate securely without needing a public IP. From there, I set up a Node.js environment and used the `@slack/bolt` framework to handle the routing and event listening. After securing my bot and app tokens in a `.env` file, I programmed the core logic for the commands, utilizing async/await functions to ensure the bot acknowledged Slack's requests within the required 3-second window before delivering its responses.
+## The Theme & Concept
+Standard utility bots can be incredibly dry. I wanted to fulfill the Hack Club submission requirements (a 24/7 bot with 3+ unique commands) while building something genuinely fun to interact with. By wrapping productivity tools in the stoic, business-focused aesthetic of Thomas Shelby, the bot feels authoritative and highly unique, ensuring its slash commands will never collide with other integrations in a workspace.
 
-The bot currently features five distinct commands to manage your workspace. You can use `/by-order-of [task]` to dramatically broadcast a high-priority task to the channel. If you need to gather the team, `/family-meeting [topic]` calls an immediate discussion thread for a specific project. For deep work, `/shelby-focus [minutes]` initiates a time block for undisturbed productivity. You can also use `/shelby-ledger [task]` to quickly log an item into the team's shared task book, and when morale is low, `/shelby-quote` drops motivational quote by Thomas Shelby. 
+##  Tech Stack
+* **Language:** JavaScript (Node.js)
+* **Framework:** `@slack/bolt`
+* **Security:** `dotenv` (for managing local environment variables)
+* **Hosting:** Hack Club Nest (Debian Linux)
+* **Process Manager:** `systemd` (Native Linux daemon)
 
-If you want to run this bot in your own workspace, it is incredibly straightforward. First, clone this repository to your local machine and run `npm install` in your terminal to grab the necessary dependencies (like `@slack/bolt` and `dotenv`). You will need to create your own Slack app on the Slack API dashboard, enable Socket Mode, and copy your Bot Token and App Token. Create a `.env` file in the root of the project folder and add your tokens there (`SLACK_BOT_TOKEN` and `SLACK_APP_TOKEN`). Finally, start the bot by running `node app.js`, and the Shelby Company will be open for business in your workspace.
+##  Features & Commands
+The bot is currently equipped with five distinct slash commands to manage your workspace:
+
+1. `/by-order-of [task]` 
+   **Use:** Broadcasts a dramatic, high-priority task alert to the entire channel.
+2. `/family-meeting [topic]` 
+   **Use:** Immediately calls a structured "Family Meeting," establishing an instant thread for team updates on a specific project.
+3. `/shelby-focus [minutes]` 
+   **Use:** A specialized focus timer that initiates a period of deep work and drops a notification when the time is up.
+4. `/shelby-ledger [task]` 
+   **Use:** Mimics Tommy Shelby's accounting books, allowing users to log a quick item into the shared team record.
+5. `/shelby-quote` 
+   **Use:** Drops a randomized, stoic quote from the Peaky Blinders universe to boost channel morale during tough deadlines.
+
+##  Challenges Faced
+The development process had a few distinct learning curves:
+* **Terminal Restrictions:** I initially ran into issues installing my dependencies because Windows PowerShell's strict execution policies blocked `npm`. I had to learn how to override this using `Set-ExecutionPolicy RemoteSigned`.
+* **The 3-Second Rule:** While adding new commands, Slack continually threw a "failed because the app did not respond" error. This taught me about Slack's strict 3-second `ack()` acknowledgment window, and the necessity of restarting the local Node server to ensure new code was actively listening for those payloads.
+* **Linux Server Administration:** Moving from a local Windows environment to a raw, headless Debian server via SSH on Hack Club Nest was a massive jump. I had to learn how to install Git and Node via `apt`, navigate the server without a mouse, forge `.env` files using `nano`, and ultimately wire the application into the server's native `systemd` architecture so it could survive reboot cycles.
+
+##  How to Use and Test Locally
+If you want to run the Shelby Company locally in your own workspace, follow these steps:
+
+**1. Set up the Slack App**
+* Go to [api.slack.com/apps](https://api.slack.com/apps) and create a new app.
+* Navigate to **Socket Mode** and enable it (Generate an App Token `xapp-...`).
+* Navigate to **OAuth & Permissions** and add the `commands` and `chat:write` scopes.
+* Install to your workspace and copy the Bot Token (`xoxb-...`).
+
+**2. Clone and Configure**
+* Clone this repository to your machine: `git clone https://github.com/YOUR_USERNAME/Shelby-Bot.git`
+* Navigate into the folder: `cd Shelby-Bot`
+* Install dependencies: `npm install`
+* Create a `.env` file in the root directory and add your tokens:
+  ```text
+  SLACK_BOT_TOKEN=xoxb-your-bot-token
+  SLACK_APP_TOKEN=xapp-your-app-token
