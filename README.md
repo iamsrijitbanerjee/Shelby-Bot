@@ -19,12 +19,14 @@ The bot is currently equipped with five distinct slash commands to manage your w
    **Use:** Broadcasts a dramatic, high-priority task alert to the entire channel.
 2. `/family-meeting [topic]` 
    **Use:** Immediately calls a structured "Family Meeting," establishing an instant thread for team updates on a specific project.
-3. `/shelby-focus [minutes]` 
-   **Use:** A specialized focus timer that initiates a period of deep work and drops a notification when the time is up.
+3. `/shelby-quote` 
+   **Use:** Drops a randomized, stoic quote from the Peaky Blinders universe to boost channel morale during tough deadlines.
 4. `/shelby-ledger [task]` 
    **Use:** Mimics Tommy Shelby's accounting books, allowing users to log a quick item into the shared team record.
-5. `/shelby-quote` 
-   **Use:** Drops a randomized, stoic quote from the Peaky Blinders universe to boost channel morale during tough deadlines.
+5. `/shelby-focus [minutes]` 
+   **Use:** A specialized focus timer that initiates a period of deep work and drops a notification when the time is up.
+
+![Commands Chart](commands.png)
 
 ##  Challenges Faced
 The development process had a few distinct learning curves:
